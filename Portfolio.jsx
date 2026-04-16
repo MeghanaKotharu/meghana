@@ -22,18 +22,17 @@ const SOCIAL_LINKS = {
   email: "mailto:meghanakotharu1@gmail.com"
 };
 
-// Helper to highlight numbers and important phrases in bold (no color)
+// Helper to highlight numbers and important phrases in bold white
 const HighlightData = ({ text }) => {
   if (!text) return null;
-  // Regex to find metrics, percentages, and specific requested phrases
   const parts = text.split(/(zero-violation\scompliance|refinance\sopportunities|\d+%\sapproval\srate|\d+%\saccuracy|\d+%\svalid\stracking\srate|\d+%\sclassification\simprovement|\d+%\sbottlenecks\sreduced|\d+%\sremoval\sdecisions|30%\sTAT|\d+%|\d+\+|\$\d+M\+?|700\+|30\+)/g);
   
   return (
     <span>
       {parts.map((part, i) => {
-        const isMatch = part.match(/(zero-violation\scompliance|refinance\sopportunities|\d+%|\d+\+|\$\d+M\+?|700\+|30\+)/);
+        const isMatch = part && part.match(/(zero-violation\scompliance|refinance\sopportunities|\d+%|\d+\+|\$\d+M\+?|700\+|30\+)/);
         return isMatch ? (
-          <span key={i} className="font-bold text-zinc-100">{part}</span>
+          <span key={i} className="font-bold text-white">{part}</span>
         ) : (
           part
         );
@@ -111,6 +110,39 @@ const MEGHANA_DATA = {
   ]
 };
 
+const PERSONAL_RECO_DB = [
+  { title: "The 100", genre: "Survival / Sci-Fi / Action", note: "First 4 seasons are peak survival drama." },
+  { title: "The Walking Dead", genre: "Horror / Survival / Drama", note: "Gritty zombie apocalypse exploration." },
+  { title: "Breaking Bad", genre: "Crime / Drama / Thriller", note: "Masterclass in character transformation." },
+  { title: "Better Call Saul", genre: "Legal Drama / Crime", note: "The perfect continuation and prequel to Breaking Bad." },
+  { title: "Friends", genre: "Sitcom / Comedy / Feel-good", note: "My absolute favorite comfort show." },
+  { title: "The Vampire Diaries", genre: "Supernatural / Romance / Drama", note: "Great supernatural drama." },
+  { title: "The Originals", genre: "Supernatural / Drama / Action", note: "Darker continuation of TVD." },
+  { title: "Malcolm in the Middle", genre: "Family Comedy", note: "Classic family comedy with brilliant fourth-wall breaking." },
+  { title: "Peaky Blinders", genre: "Crime / Period Drama", note: "Gritty, stylish crime saga." },
+  { title: "Desperate Housewives", genre: "Mystery / Drama / Comedy", note: "Unpredictable Lane secrets." },
+  { title: "Why Women Kill", genre: "Dark Comedy / Drama / Anthology", note: "Exploring female roles across decades." },
+  { title: "Gilmore Girls", genre: "Feel-good / Drama / Comedy", note: "Ultimate feel-good vibes." },
+  { title: "Modern Family", genre: "Mockumentary / Comedy / Family", note: "Mockumentary about family chaos." },
+  { title: "Family Guy", genre: "Animated Satire / Comedy", note: "Peak random dark humor." },
+  { title: "HIMYM", genre: "Sitcom / Comedy / Romance", note: "Legendary sitcom about friendship." },
+  { title: "Stranger Things", genre: "Sci-Fi / Horror / Supernatural", note: "Top-tier sci-fi with heart." },
+  { title: "Big Bang Theory", genre: "Sitcom / Comedy", note: "Celebration of nerd culture." },
+  { title: "Brooklyn 99", genre: "Workplace Comedy / Police", note: "Pure joy and funniest characters." },
+  { title: "Suits", genre: "Legal Drama / Corporate", note: "Masterclass in confidence." },
+  { title: "The Office", genre: "Mockumentary / Workplace Comedy", note: "Legendary. My ultimate favorite show." },
+  { title: "Solo Leveling", genre: "Anime / Fantasy / Action", note: "Stunning modern anime." },
+  { title: "Lucifer", genre: "Supernatural / Procedural / Crime", note: "Devil solving crimes." },
+  { title: "Emily in Paris", genre: "Romance / Comedy / Fashion", note: "Beautiful, fun, easy watch." },
+  { title: "You", genre: "Psychological Thriller / Crime", note: "Chilling psychological thriller." },
+  { title: "Orange Is the New Black", genre: "Drama / Comedy / Crime", note: "Balancing comedy and drama." },
+  { title: "Death Note", genre: "Anime / Psychological Thriller", note: "Psychological battle." },
+  { title: "Demon Slayer", genre: "Anime / Fantasy / Action", note: "Visually stunning action." },
+  { title: "Grey's Anatomy", genre: "Medical Drama / Romance", note: "Interesting medical drama." },
+  { title: "Lost in Space", genre: "Sci-Fi / Adventure", note: "Family sci-fi adventure." },
+  { title: "Ginny & Georgia", genre: "Drama / Coming-of-age", note: "Complex mother-daughter relationship." }
+];
+
 const SITCOM_DATABASE = {
   'Friends': {
     quotes: [
@@ -150,6 +182,14 @@ const SITCOM_DATABASE = {
     ],
     cast: ['Barney', 'Robin', 'Ted', 'Marshall', 'Lily', 'Ranjit', 'Victoria', 'Tracy', 'Quinn', 'Zoey', 'Carl', 'Patrice']
   },
+  'The Walking Dead': {
+    quotes: [
+      { name: 'Rick', quote: "CORAL!", color: 'bg-blue-900' },
+      { name: 'Negan', quote: "Little pig, let me in.", color: 'bg-zinc-700' },
+      { name: 'Daryl', quote: "I'm the one who stayed.", color: 'bg-green-800' }
+    ],
+    cast: ['Rick', 'Negan', 'Daryl', 'Glenn', 'Maggie', 'Michonne', 'Carol', 'Carl', 'Shane', 'Hershel', 'Rosita', 'Eugene']
+  },
   'The Office': {
     quotes: [
       { name: 'Michael', quote: "I DECLARE BANKRUPTCY!", color: 'bg-blue-600' },
@@ -159,23 +199,36 @@ const SITCOM_DATABASE = {
     ],
     cast: ['Michael', 'Dwight', 'Jim', 'Kevin', 'Pam', 'Stanley', 'Angela', 'Oscar', 'Creed', 'Toby', 'Kelly', 'Ryan']
   },
+  'Brooklyn 99': {
+    quotes: [
+      { name: 'Jake', quote: "Cool, cool, cool, cool, cool.", color: 'bg-blue-600' },
+      { name: 'Holt', quote: "VINDICATION!", color: 'bg-zinc-800' },
+      { name: 'Terry', quote: "Terry loves yogurt.", color: 'bg-emerald-600' }
+    ],
+    cast: ['Jake', 'Holt', 'Terry', 'Amy', 'Rosa', 'Charles', 'Gina', 'Hitchcock', 'Scully', 'Pimento', 'Doug', 'Kevin']
+  },
+  'Gossip Girl': {
+    quotes: [
+      { name: 'Gossip Girl', quote: "Xoxo, Gossip Girl.", color: 'bg-pink-700' },
+      { name: 'Blair', quote: "Destiny is for losers.", color: 'bg-purple-800' }
+    ],
+    cast: ['Gossip Girl', 'Blair', 'Serena', 'Chuck', 'Dan', 'Nate', 'Jenny', 'Vanessa', 'Rufus', 'Lily', 'Eric', 'Georgina']
+  },
   'Suits': {
     quotes: [
       { name: 'Harvey', quote: "I don't play the odds, I play the man.", color: 'bg-zinc-900' },
       { name: 'Mike', quote: "I remember everything.", color: 'bg-blue-800' }
     ],
     cast: ['Harvey', 'Mike', 'Louis', 'Donna', 'Rachel', 'Jessica', 'Robert', 'Katrina', 'Gretchen', 'Alex', 'Samantha', 'Sheila']
+  },
+  'Big Bang Theory': {
+    quotes: [
+      { name: 'Sheldon', quote: "Bazinga!", color: 'bg-red-600' },
+      { name: 'Penny', quote: "Not knowing is part of the fun.", color: 'bg-yellow-500' }
+    ],
+    cast: ['Sheldon', 'Penny', 'Leonard', 'Howard', 'Raj', 'Bernadette', 'Amy', 'Stuart', 'Mary', 'Wil', 'Burt', 'Beverly']
   }
 };
-
-const PERSONAL_RECO_DB = [
-  { title: "The 100", genre: "Survival / Sci-Fi", note: "Peak survival drama." },
-  { title: "Breaking Bad", genre: "Crime / Drama", note: "Masterclass in transformation." },
-  { title: "Gilmore Girls", genre: "Feel-good / Comedy", note: "Fast dialogue and vibes." },
-  { title: "Emily in Paris", genre: "Romance / Fashion", note: "Beautiful easy watch." }
-];
-
-const GLOBAL_CAST_REGISTRY = [...new Set(Object.values(SITCOM_DATABASE).flat().map(c => c.cast).flat())];
 
 // --- GEMINI API UTILITIES ---
 const callGeminiAPI = async (prompt, systemInstruction) => {
@@ -235,7 +288,7 @@ const playTTS = async (text) => {
 const AIChat = () => {
   const [messages, setMessages] = useState([{ 
     role: 'ai', 
-    text: "Synthetix active. Query professional background metrics or specific series recommendations. How shall I assist?" 
+    text: "Nexus Prime active. Query professional background metrics or specific series recommendations. How shall I assist?" 
   }]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -261,18 +314,17 @@ const AIChat = () => {
     setInput(''); setLoading(true);
 
     const systemInstruction = `You are Synthetix, an advanced AI proxy for MEGHANA KOTHARU, Data Analyst at Google.
-    
     STRICT DATA ROUTING RULES:
-    1. If user asks about her background/career, ONLY use CAREER data. 
-    2. NEVER use markdown bolding (double asterisks).
-    3. Use structured bullet points and clear line breaks. No conversational filler.
-    4. Refer to data objectively as 'Meghana's role'.
-    
+    1. If user asks about her background/career, ONLY use CAREER data. DO NOT mention webseries.
+    2. If user explicitly asks for show recommendations or mentions their MOOD, then use the WEBSERIES list.
+    3. NEVER use markdown bolding (double asterisks).
+    4. Use structured bullet points and clear line breaks. No conversational filler.
+    5. Refer to data objectively as 'Meghana's role'.
     CAREER DATA: 
-    - Google: 93% accuracy, 70% reduction in bottlenecks.
-    - Brokers Office (Virtual Admin): 98% approval rate, $5M+ monthly pipeline. Identified refinance opportunities via database analysis.
+    - Google: 93% accuracy, 70% reduction in bottlenecks. Improved classification by 18%.
+    - Brokers Office: 98% approval rate, identified refinance opportunities.
     - Prathyusha Garimella: Production Manager Intern.
-    WEBSERIES: ${JSON.stringify(PERSONAL_RECO_DB)}`;
+    WEBSERIES DATABASE: ${JSON.stringify(PERSONAL_RECO_DB)}`;
 
     const aiResponse = await callGeminiAPI(userMsg, systemInstruction);
     setMessages(prev => [...prev, { role: 'ai', text: aiResponse }]);
@@ -406,7 +458,7 @@ const SitcomGame = ({ onTabChange }) => {
 
   const performAudit = async () => {
     setAuditLoading(true);
-    const system = "You are an Analytical Auditor. Provide a humorous 2-sentence critique. No bolding.";
+    const system = "You are an Analytical Auditor. Provide a humorous critique. No bolding.";
     const prompt = `User scored ${score}. Audit their accuracy.`;
     const res = await callGeminiAPI(prompt, system);
     setAuditResult(res); setAuditLoading(false);
@@ -530,17 +582,17 @@ export default function App() {
                     </div>
                   </div>
                 </div>
-                <p className="text-base text-zinc-400 max-w-lg font-light leading-relaxed text-left italic text-left">
+                <p className="text-base text-zinc-400 max-w-lg font-light leading-relaxed text-left italic text-left text-left">
                   Data Analyst @ <span className="text-blue-400 font-bold underline decoration-blue-500/20 underline-offset-8 text-left text-left text-left">Google</span>. Transforming manual workflows into precision automated ecosystems.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-2 text-left">
                   <button onClick={() => setActiveTab('game')} className="bg-white text-black font-bold px-6 py-2.5 rounded-xl hover:bg-zinc-200 transition-all uppercase text-[10px] tracking-widest shadow-xl text-left">
                     Play a Game <ChevronRight size={14} className="inline ml-1" />
                   </button>
-                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-all text-left">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-2 px-6 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-all text-left text-left">
                     LinkedIn <ExternalLink size={12} />
                   </a>
-                  <a href={SOCIAL_LINKS.email} className="flex items-center gap-2 px-6 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-all text-left">
+                  <a href={SOCIAL_LINKS.email} className="flex items-center gap-2 px-6 py-2.5 bg-zinc-900 border border-zinc-800 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-800 transition-all text-left text-left">
                     Email <Mail size={12} />
                   </a>
                 </div>
@@ -558,23 +610,23 @@ export default function App() {
             </section>
             
             <section className="space-y-8 text-left text-left">
-              <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left"><LayoutGrid className="text-blue-500" /> Strategic Projects</h2>
+              <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left text-left"><LayoutGrid className="text-blue-500" /> Strategic Projects</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
                 {(MEGHANA_DATA.projects || []).map((p, i) => (
                   <div key={i} className="p-8 bg-zinc-900 border border-zinc-800 rounded-[32px] space-y-5 hover:border-zinc-600 transition-colors shadow-2xl text-left">
                     <h3 className="text-lg font-black text-white italic underline decoration-blue-500 decoration-2 underline-offset-8 text-left text-left">{p.name}</h3>
                     <div className="space-y-5 text-left">
                        <div className="space-y-1.5 text-left text-left text-left">
-                          <div className="flex items-center gap-2 text-blue-500 font-black uppercase text-[9px] tracking-widest text-left text-left"><Target size={12}/> Problem</div>
-                          <p className="text-zinc-400 font-light text-xs leading-relaxed text-left text-left"><HighlightData text={p.problem}/></p>
+                          <div className="flex items-center gap-2 text-blue-500 font-black uppercase text-[9px] tracking-widest text-left text-left text-left"><Target size={12}/> Problem</div>
+                          <p className="text-zinc-400 font-light text-xs leading-relaxed text-left text-left text-left"><HighlightData text={p.problem}/></p>
                        </div>
                        <div className="space-y-1.5 text-left text-left text-left">
-                          <div className="flex items-center gap-2 text-purple-500 font-black uppercase text-[9px] tracking-widest text-left text-left"><Wand2 size={12}/> Solution</div>
-                          <p className="text-zinc-400 font-light text-xs leading-relaxed text-left text-left"><HighlightData text={p.solution}/></p>
+                          <div className="flex items-center gap-2 text-purple-500 font-black uppercase text-[9px] tracking-widest text-left text-left text-left"><Wand2 size={12}/> Solution</div>
+                          <p className="text-zinc-400 font-light text-xs leading-relaxed text-left text-left text-left"><HighlightData text={p.solution}/></p>
                        </div>
-                       <div className="space-y-1.5 text-left text-zinc-300 text-left text-left">
-                          <div className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[9px] tracking-widest text-left text-left text-left text-left"> Result</div>
-                          <p className="font-medium text-xs leading-relaxed text-left text-left text-left text-left"><HighlightData text={p.result}/></p>
+                       <div className="space-y-1.5 text-left text-zinc-300 text-left text-left text-left">
+                          <div className="flex items-center gap-2 text-emerald-500 font-black uppercase text-[9px] tracking-widest text-left text-left text-left text-left text-left text-left"> Result</div>
+                          <p className="font-medium text-xs leading-relaxed text-left text-left text-left text-left text-left text-left"><HighlightData text={p.result}/></p>
                        </div>
                     </div>
                   </div>
@@ -582,69 +634,66 @@ export default function App() {
               </div>
             </section>
 
-            {/* ALIGNED CREDENTIALS TRACK */}
+            {/* RESTRUCTURED DATA BLOCKS */}
             <div className="space-y-10 text-left text-left">
                 {/* ROW 1: Education | Awards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left text-left text-left">
                    <div className="space-y-8 text-left text-left">
-                      <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left"><GraduationCap className="text-blue-500" /> Education</h2>
-                      <div className="space-y-3 text-left text-left">
+                      <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left"><GraduationCap className="text-blue-500" /> Education</h2>
+                      <div className="space-y-3 text-left text-left text-left">
                         {(MEGHANA_DATA.education || []).map((edu, i) => (
-                          <div key={i} className="p-6 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900 transition-colors shadow-lg text-left text-left">
-                            <h3 className="text-sm font-black text-white uppercase tracking-tight text-left text-left">{edu.degree}</h3>
-                            <p className="text-zinc-400 text-xs font-medium mt-1 text-left text-left">{edu.school} | {edu.period}</p>
-                            <span className="mt-3 inline-block px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full font-black text-[8px] uppercase tracking-widest border border-blue-500/20 text-left text-left">{edu.score}</span>
+                          <div key={i} className="p-6 bg-zinc-900/40 border border-zinc-800 rounded-3xl hover:bg-zinc-900 transition-colors shadow-lg text-left text-left text-left">
+                            <h3 className="text-sm font-black text-white uppercase tracking-tight text-left text-left text-left">{edu.degree}</h3>
+                            <p className="text-zinc-400 text-xs font-medium mt-1 text-left text-left text-left">{edu.school} | {edu.period}</p>
+                            <span className="mt-3 inline-block px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full font-black text-[8px] uppercase tracking-widest border border-blue-500/20 text-left text-left text-left">{edu.score}</span>
                           </div>
                         ))}
                       </div>
                    </div>
-                   <div className="space-y-8 text-left text-left text-left">
-                      <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left"><Award className="text-yellow-500" /> Awards & Achievements</h2>
-                      <div className="space-y-3 text-left text-left">
+                   <div className="space-y-8 text-left text-left text-left text-left">
+                      <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left"><Award className="text-yellow-500" /> Awards & Achievements</h2>
+                      <div className="space-y-3 text-left text-left text-left">
                         {(MEGHANA_DATA.awardsAndAchievements || []).map((item, i) => (
-                          <div key={i} className="flex gap-4 p-4 bg-zinc-900/40 border border-zinc-800 rounded-2xl items-center border-l-4 border-l-yellow-500/50 shadow-lg text-left text-zinc-300 text-left">
+                          <div key={i} className="flex gap-4 p-4 bg-zinc-900/40 border border-zinc-800 rounded-2xl items-center border-l-4 border-l-yellow-500/50 shadow-lg text-left text-zinc-300 text-left text-left text-left">
                              {item.type === 'Award' ? <Trophy className="text-yellow-500 shrink-0" size={16} /> : <Star className="text-purple-500 shrink-0" size={16} />}
-                             <p className="text-zinc-400 text-xs font-medium text-left text-left">{item.text}</p>
+                             <p className="text-zinc-400 text-xs font-medium text-left text-left text-left">{item.text}</p>
                           </div>
                         ))}
                       </div>
                    </div>
                 </div>
 
-                {/* ROW 2: Certifications | Skills Matrix (Aligned line) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left text-left">
-                   <div className="space-y-8 text-left text-left text-left">
-                      <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left"><FileBadge className="text-blue-500" /> Certifications</h2>
+                {/* ROW 2: Certifications | Skills Matrix (Aligned) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 text-left text-left text-left">
+                   <div className="space-y-8 text-left text-left text-left text-left text-left">
+                      <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left text-left"><FileBadge className="text-blue-500" /> Certifications</h2>
                       {(MEGHANA_DATA.certifications || []).map((c, i) => (
-                        <div key={i} className="flex gap-4 p-6 bg-zinc-900/40 border border-zinc-800 rounded-3xl items-center border-l-4 border-l-blue-500/50 shadow-lg hover:bg-zinc-900 transition-colors text-left text-zinc-300 text-left">
-                            <CheckCircle2 className="text-blue-500 shrink-0" size={24} />
-                            <p className="text-zinc-300 text-xs font-medium leading-relaxed italic uppercase tracking-widest text-left text-left">{c}</p>
-                        </div>
+                        <div key={i} className="flex gap-4 p-6 bg-zinc-900/40 border border-zinc-800 rounded-3xl items-center border-l-4 border-l-blue-500/50 shadow-lg hover:bg-zinc-900 transition-colors text-left text-zinc-300 text-left text-left text-left text-left">{c}</div>
                       ))}
                    </div>
-                   <div className="space-y-8 text-left text-left text-left">
-                      <h2 className="text-2xl font-bold text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left"><Database className="text-blue-500" /> Skills Matrix</h2>
-                      <div className="flex flex-wrap gap-2.5 text-left text-left text-left">
+                   <div className="space-y-8 text-left text-left text-left text-left text-left text-left">
+                      <h2 className="text-2xl font-bold text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left text-left text-left"><Database className="text-blue-500" /> Skills Matrix</h2>
+                      <div className="flex flex-wrap gap-2.5 text-left text-left text-left text-left text-left text-left text-left">
                         {(MEGHANA_DATA.skills || []).map((s, i) => (
-                          <span key={i} className="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-xl font-black text-[9px] uppercase tracking-widest text-zinc-400 hover:text-white transition-all cursor-default shadow-md text-left text-left text-left text-left">{s}</span>
+                          <span key={i} className="px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-xl font-black text-[9px] uppercase tracking-widest text-zinc-400 hover:text-white transition-all cursor-default shadow-md text-left text-left text-left text-left text-left text-left text-left">{s}</span>
                         ))}
                       </div>
                    </div>
                 </div>
             </div>
 
-            <section className="space-y-8 text-left text-left text-left">
-                <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left text-left text-left"><BriefcaseBusiness className="text-blue-500" /> Professional Experience</h2>
-                <div className="space-y-8 text-zinc-300 text-left text-left">
+            <section className="space-y-8 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><BriefcaseBusiness className="text-blue-500" /> Professional Experience</h2>
+                <div className="space-y-8 text-zinc-300 text-left text-left text-left text-left text-left text-left">
                   {(MEGHANA_DATA.experience || []).map((exp, i) => (
-                    <div key={i} className="relative pl-8 border-l border-zinc-800 group text-left text-left text-left">
-                      <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] text-left text-left" />
-                      <p className="text-blue-400 font-bold text-[9px] uppercase tracking-widest mb-1 text-left text-left text-left">{exp.period}</p>
-                      <h3 className="text-base font-black text-white uppercase italic text-left text-left text-left">{exp.role} @ {exp.company}</h3>
-                      <ul className="mt-3 space-y-2 text-left text-left text-left">
+                    <div key={i} className="relative pl-8 border-l border-zinc-800 group text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                      <div className="absolute -left-[5px] top-1.5 w-2.5 h-2.5 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)] text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left" />
+                      <p className="text-blue-400 font-bold text-[9px] uppercase tracking-widest mb-1 text-left text-left text-left text-left text-left text-left">{exp.period}</p>
+                      <h3 className="text-base font-black text-white uppercase italic text-left text-left text-left text-left text-left text-left">{exp.role} @ {exp.company}</h3>
+                      <ul className="mt-3 space-y-2 text-left text-left text-left text-left text-left text-left text-left">
                         {(exp.bullets || []).map((b, j) => (
-                          <li key={j} className="text-zinc-500 text-xs font-light leading-relaxed flex items-start gap-3 text-left text-left text-left">
-                            <div className="w-1 h-1 bg-zinc-800 rounded-full mt-1.5 shrink-0 group-hover:bg-blue-500 transition-colors" /> <HighlightData text={b} />
+                          <li key={j} className="text-zinc-500 text-xs font-light leading-relaxed flex items-start gap-3 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                            <div className="w-1 h-1 bg-zinc-800 rounded-full mt-1.5 shrink-0 group-hover:bg-blue-500 transition-colors text-left" /> <HighlightData text={b} />
                           </li>
                         ))}
                       </ul>
@@ -653,17 +702,17 @@ export default function App() {
                 </div>
             </section>
 
-            <section className="space-y-8 text-left pb-10 text-zinc-300 text-left text-left">
+            <section className="space-y-8 text-left pb-10 text-zinc-300 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
               <h2 className="text-2xl font-black text-white uppercase tracking-tight flex items-center gap-3 text-left text-left text-left text-left text-left"><Heart className="text-red-500" /> Beyond the Data</h2>
-              <div className="bg-zinc-950/50 p-8 rounded-[40px] border border-zinc-800 relative overflow-hidden group text-left text-left text-left">
-                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity text-left text-left text-left text-left"><Users size={120}/></div>
-                <p className="text-lg text-zinc-300 italic mb-8 max-w-xl font-light text-left leading-relaxed text-left text-left text-left">"This is not it. There is a lot more to me than my work."</p>
-                <div className="grid grid-cols-3 gap-6 text-left text-left">
+              <div className="bg-zinc-950/50 p-8 rounded-[40px] border border-zinc-800 relative overflow-hidden group text-left text-left text-left text-left text-left">
+                <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity text-left text-left text-left text-left text-left text-left text-left"><Users size={120}/></div>
+                <p className="text-lg text-zinc-300 italic mb-8 max-w-xl font-light text-left leading-relaxed text-left text-left text-left text-left text-left text-left text-left">"This is not it. There is a lot more to me than my work."</p>
+                <div className="grid grid-cols-3 gap-6 text-left text-left text-left text-left">
                   {(MEGHANA_DATA.hobbies || []).map((hobby, i) => (
-                    <div key={i} className="p-4 bg-zinc-900/40 border border-zinc-800 rounded-2xl flex flex-col items-center text-center space-y-3 hover:border-blue-500/30 transition-all shadow-lg text-center text-left">
-                       <div className="p-2 bg-blue-500/10 rounded-xl text-center text-left text-left"><hobby.icon className="text-blue-400 text-center text-left" size={20} /></div>
-                       <h4 className="text-xs font-bold text-white uppercase tracking-widest text-center text-center text-center text-center text-center">{hobby.name}</h4>
-                       <p className="text-zinc-500 text-[9px] font-light text-center text-center text-center text-center text-center">{hobby.note}</p>
+                    <div key={i} className="p-4 bg-zinc-900/40 border border-zinc-800 rounded-2xl flex flex-col items-center text-center space-y-3 hover:border-blue-500/30 transition-all shadow-lg text-center text-left text-left text-left text-left">
+                       <div className="p-2 bg-blue-500/10 rounded-xl text-center text-left text-left text-left text-left text-left"><hobby.icon className="text-blue-400 text-center text-left text-left text-left text-left text-left" size={20} /></div>
+                       <h4 className="text-xs font-bold text-white uppercase tracking-widest text-center text-center text-center text-center text-center text-center text-center text-center text-center">{hobby.name}</h4>
+                       <p className="text-zinc-500 text-[9px] font-light text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center">{hobby.note}</p>
                     </div>
                   ))}
                 </div>
@@ -673,25 +722,25 @@ export default function App() {
         )}
         {activeTab === 'game' && <div className="max-w-6xl mx-auto"><SitcomGame onTabChange={setActiveTab} /></div>}
         {activeTab === 'ai' && (
-          <div className="animate-in fade-in duration-700 max-w-4xl mx-auto space-y-16 text-center py-10 text-zinc-300 text-center text-center">
-            <div className="space-y-4 text-center text-center">
-              <h1 className="text-7xl font-black text-white italic uppercase tracking-tighter leading-none text-center text-center text-center text-center">Talk to AI</h1>
-              <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto italic leading-relaxed text-center uppercase tracking-widest text-center text-center text-center text-center">Query professional metrics or discover recommendations from Meghana's curated database.</p>
+          <div className="animate-in fade-in duration-700 max-w-4xl mx-auto space-y-16 text-center py-10 text-zinc-300 text-center text-center text-center text-center text-center text-center">
+            <div className="space-y-4 text-center text-center text-center text-center text-center text-center text-center">
+              <h1 className="text-7xl font-black text-white italic uppercase tracking-tighter leading-none text-center text-center text-center text-center text-center text-center text-center">Talk to AI</h1>
+              <p className="text-xl text-zinc-500 font-light max-w-2xl mx-auto italic leading-relaxed text-center uppercase tracking-widest text-center text-center text-center text-center text-center text-center text-center text-center">Query professional metrics or discover recommendations from Meghana's curated database.</p>
             </div>
             <AIChat />
           </div>
         )}
       </main>
-      <footer className="border-t border-zinc-900 py-12 px-10 text-left text-zinc-300 text-left">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-10 text-left text-left">
-          <div className="flex items-center gap-4 font-black text-2xl text-white italic tracking-widest uppercase text-left text-left text-left">
-             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg shadow-blue-900/20 text-left text-left text-left text-left" />
+      <footer className="border-t border-zinc-900 py-12 px-10 text-left text-zinc-300 text-left text-left text-left text-left text-left">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-10 text-left text-left text-left text-left text-left text-left">
+          <div className="flex items-center gap-4 font-black text-2xl text-white italic tracking-widest uppercase text-left text-left text-left text-left text-left text-left text-left">
+             <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg shadow-blue-900/20 text-left text-left text-left text-left text-left text-left text-left text-left" />
              MEGHANA_ANALYSIS
           </div>
-          <div className="flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 text-left text-left">
-             <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="hover:text-white transition-all text-left text-left text-left text-left text-left">LinkedIn</a>
-             <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="hover:text-white transition-all text-left text-left text-left text-left text-left text-left">GitHub</a>
-             <a href={SOCIAL_LINKS.email} className="hover:text-white transition-all text-left text-left text-left text-left text-left text-left">Email</a>
+          <div className="flex gap-10 text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 text-left text-left text-left text-left text-left text-left">
+             <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noreferrer" className="hover:text-white transition-all text-left text-left text-left text-left text-left text-left text-left text-left">LinkedIn</a>
+             <a href={SOCIAL_LINKS.github} target="_blank" rel="noreferrer" className="hover:text-white transition-all text-left text-left text-left text-left text-left text-left text-left text-left text-left">GitHub</a>
+             <a href={SOCIAL_LINKS.email} className="hover:text-white transition-all text-left text-left text-left text-left text-left text-left text-left text-left text-left">Email</a>
           </div>
         </div>
       </footer>
